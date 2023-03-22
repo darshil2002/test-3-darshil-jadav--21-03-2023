@@ -4,59 +4,48 @@ import { HttpClient } from '@angular/common/http';
 import { map, pluck } from 'rxjs';
 import { Program } from './model/program';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  myFormData=[{
-
-  }];
-
+  myFormData = [{}];
 
   title = 'behaviourSubject';
-  programName='';
-  programNumber='';
-  programBudget='';
-  programDescription='';
-  canDelete=true;
-  isActive= true;
-  isVirtual=false;
-  programID= '';
-
-    myGridData: any=[];
-    isActivate:any=[];
+ formData:any;
+  showFrom = false;
+  myGridData: any = [];
+  isActivate: any = [];
   ngOnInit(): void {
-    this.myservice.getProgram().pipe(pluck('programs')).subscribe(res => {
-      this.myGridData = res
+    this.myservice
+      .getProgram()
+      .pipe(pluck('programs'))
+      .subscribe((res) => {
+        this.myGridData = res;
+        console.log(res);
+      });
+    this.myservice
+      .getProgram()
+      .pipe(pluck('programs', 'isActive'))
+      .subscribe((res) => {
+        this.isActivate = res;
+        console.log(res);
+      });
+  }
+  constructor(private myservice: MyservService) {}
+
+  addButtonClicked() {
+    console.log('the btn is clicked');
+    this.showFrom = !this.showFrom;
+  }
+
+  sendData(myForm: any) {
+    this.formData=myForm;
+    this.myservice.addingData(this.formData).subscribe(res=>{
       console.log(res);
       
-    });
-    this.myservice.getProgram().pipe(pluck('programs','isActive')).subscribe(res => {
-      this.isActivate = res
-      console.log(res);
-    });
-  }
-  constructor(private http: HttpClient, private myservice: MyservService) {}
-  showFrom=false;
-  
-  addButtonClicked(){
-    console.log('the btn is clicked')
-    this.showFrom=!this.showFrom;
-  }
-
-  submitForm(myForm:any){
-    console.log('submit button is clicked')
-    const programName=this.programName;
-    const programDescription=this.programDescription;
-    const programBudget=this.programBudget;
-    const programNumber=this.programNumber;
-    console.log(programName);
-    console.log(programDescription);
-    console.log(programNumber);
-    console.log(programBudget);
-
+    })
+ //   console.log(this.formData);
   }
 }

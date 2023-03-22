@@ -9,3 +9,8 @@ export interface Program {
     isVirtual: boolean;
   }
   
+export interface ApiDataType<programs> {
+  success: boolean;
+  message: string;
+  programs: programs;
+}

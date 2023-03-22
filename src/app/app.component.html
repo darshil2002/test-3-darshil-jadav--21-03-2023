@@ -2,24 +2,24 @@
 <button id="myAddButton" class=" mx-3 btn btn-primary" (click) ="addButtonClicked()">Add new project</button>
 
 <!-- my form starts here  -->
-<form class= "my-5 m-3" *ngIf="showFrom" id="myForm" #myForm="ngForm" (ngSubmit)="submitForm(myForm)" name="myForm" autocomplete="off">
+<form class= "my-5 m-3" *ngIf="showFrom" id="myForm" #myForm="ngForm"  name="myForm" autocomplete="off">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Program Name</label>
-    <input type="text" class="form-control" id="programNameId" aria-describedby="programName" name="programName" [(ngModel)]="programName">
+    <input type="text" class="form-control" id="programNameId" aria-describedby="programName" name="programName" [ngModel]="">
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Program Number</label>
-    <input type="number" class="form-control" id="programNumber" name="programNumber" [(ngModel)]="programNumber"  >
+    <input type="number" class="form-control" id="programNumber" name="programNumber" [ngModel]=""  >
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Program Budget</label>
-    <input type="number" class="form-control" id="programBudget" name="programBudget" [(ngModel)]="programBudget">
+    <input type="number" class="form-control" id="programBudget" name="programBudget" [ngModel]="">
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Program Description </label>
-    <input type="text" class="form-control" id="programDescription" name="programDescription" [(ngModel)]="programDescription">
+    <input type="text" class="form-control" id="programDescription" name="programDescription" [ngModel]="">
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" (click)="sendData(myForm.value)">Submit</button>
 </form>
 
 <br><br>
