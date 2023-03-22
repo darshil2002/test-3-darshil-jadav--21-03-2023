@@ -39,6 +39,9 @@ export class AppComponent {
     console.log('the btn is clicked');
     this.showFrom = !this.showFrom;
   }
+  editButtonPushed(){
+    this.showFrom=!this.showFrom;
+  }
 
   sendData(myForm: any) {
     this.formData=myForm;
