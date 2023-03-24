@@ -35,10 +35,12 @@
       <e-column field='programDescription' headerText='programDescription' textAlign='center' width=100></e-column>
       <e-column field='' headerText='Actions' textAlign='center' format='yMd' width=50>
         <ng-template #template let-data>
-          <button class="btn btn-primary mx-2 btn-dark" (click)="editButtonPushed()">Edit</button>
+          <button class="btn btn-primary mx-2 btn-dark" (click)="editButtonPushed(data)">Edit</button>
           <button class="btn btn-primary mx-2 btn-success">Activate</button>
         </ng-template>
       </e-column>
   </e-columns>
 </ejs-grid>
 </div>
+
+

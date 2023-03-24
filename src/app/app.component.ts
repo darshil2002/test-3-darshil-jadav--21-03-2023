@@ -17,6 +17,7 @@ export class AppComponent {
   showFrom = false;
   myGridData: any = [];
   isActivate: any = [];
+  location: any;
   ngOnInit(): void {
     this.myservice
       .getProgram()
@@ -39,16 +40,29 @@ export class AppComponent {
     console.log('the btn is clicked');
     this.showFrom = !this.showFrom;
   }
-  editButtonPushed(){
-    this.showFrom=!this.showFrom;
+  editButtonPushed(programData: any){
+   this.showFrom=!this.showFrom;
+//  this.myservice.formData = programData;
+ this.myservice.data = programData;
+//  this.myservice.isClicked.next(true);
+//  this.myservice.addOrEdit.next(false);
+  }
+
+
+  editdata(programData: any) {
+
+    ;
   }
 
   sendData(myForm: any) {
     this.formData=myForm;
     this.myservice.addingData(this.formData).subscribe(res=>{
       console.log(res);
-      
+    
     })
+    // window.location.reload();
  //   console.log(this.formData);
+ this.location.reload();
+    
   }
 }
