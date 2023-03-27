@@ -5,19 +5,19 @@
 <form class= "my-5 m-3" *ngIf="showFrom" id="myForm" #myForm="ngForm"  name="myForm" autocomplete="off">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Program Name</label>
-    <input type="text" class="form-control" id="programNameId" aria-describedby="programName" name="programName" [ngModel]="">
+    <input type="text" class="form-control" id="programNameId" aria-describedby="programName" name="programName" [ngModel]="editData.programName">
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Program Number</label>
-    <input type="number" class="form-control" id="programNumber" name="programNumber" [ngModel]=""  >
+    <input type="number" class="form-control" id="programNumber" name="programNumber" [ngModel]="editData.programNumber"  >
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Program Budget</label>
-    <input type="number" class="form-control" id="programBudget" name="programBudget" [ngModel]="">
+    <input type="number" class="form-control" id="programBudget" name="programBudget" [ngModel]="editData.programBudget">
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Program Description </label>
-    <input type="text" class="form-control" id="programDescription" name="programDescription" [ngModel]="">
+    <input type="text" class="form-control" id="programDescription" name="programDescription" [ngModel]="editData.programDescription">
   </div>
   <button type="submit" class="btn btn-primary" (click)="sendData(myForm.value)">Submit</button>
 </form>
@@ -35,12 +35,47 @@
       <e-column field='programDescription' headerText='programDescription' textAlign='center' width=100></e-column>
       <e-column field='' headerText='Actions' textAlign='center' format='yMd' width=50>
         <ng-template #template let-data>
-          <button class="btn btn-primary mx-2 btn-dark" (click)="editButtonPushed(data)">Edit</button>
+          <button class="btn btn-primary mx-2 btn-dark"
+        
+           data-bs-target="#exampleModal" data-bs-toggle="modal" (click)="editButtonPushed(data)" >Edit</button>
+           <!-- (click)="editButtonPushed(data)"  -->
           <button class="btn btn-primary mx-2 btn-success">Activate</button>
         </ng-template>
       </e-column>
   </e-columns>
 </ejs-grid>
+
+<!-- popup -->
+
+<!-- Modal -->
+<div class="modal fade my-10" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title is here</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm" (ngSubmit)="pushEditedValue(editData.programID,editForm.value)">
+          <input type="text" class="form-control my-3" name="programName" placeholder="programName" [ngModel]="editData.programName">
+          <input type="text" class="form-control my-3"  name="programDescription" placeholder="programDescription" [ngModel]="editData.programDescription">
+          <input type="number" class="form-control my-3"  name="programBudget" placeholder="programBudget" [ngModel]="editData.programBudget">
+          <input type="number" class="form-control my-3"  name="programNumber" placeholder="programNumber"[ngModel]="editData.programNumber" >
+     
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary"  (click)="pushEditedValue(editData.programID,editForm.value)" >Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- from  -->
+
+
+
 </div>
 
 

@@ -12,7 +12,18 @@ import { Program } from './model/program';
 export class AppComponent {
   myFormData = [{}];
 
-  title = 'behaviourSubject';
+  title = 'test-3';
+
+  editData = {
+    programBudget: 0,
+    programDescription: '',
+    programName: '',
+    programNumber: '',
+    isVirtual: false,
+    programID: '',
+    isActive: false,
+    canDelete: false
+  }
  formData:any;
   showFrom = false;
   myGridData: any = [];
@@ -37,21 +48,39 @@ export class AppComponent {
   constructor(private myservice: MyservService) {}
 
   addButtonClicked() {
+    
+  this.editData = {
+    programBudget: 0,
+    programDescription: '',
+    programName: '',
+    programNumber: '',
+    isVirtual: false,
+    programID: '',
+    isActive: false,
+    canDelete: false
+  }
     console.log('the btn is clicked');
     this.showFrom = !this.showFrom;
   }
   editButtonPushed(programData: any){
-   this.showFrom=!this.showFrom;
-//  this.myservice.formData = programData;
- this.myservice.data = programData;
+   console.log(programData);
+    this.editData=programData;
+    this.myservice.formDataOne=programData;
+   // console.log(this.editData);
+    
+    this.myservice.formDataOne = programData;
+    // this.showFrom=!this.showFrom;
 //  this.myservice.isClicked.next(true);
 //  this.myservice.addOrEdit.next(false);
   }
 
 
-  editdata(programData: any) {
-
-    ;
+  pushEditedValue(programId:string,programData: Program) {
+    programData.programID=programId;
+    console.log(programId);
+    this.myservice.formDataOne=programData;
+    this.myservice.editData(programData).subscribe();
+  
   }
 
   sendData(myForm: any) {

@@ -8,6 +8,17 @@ import { ApiDataType, Program } from '../model/program';
 })
 export class MyservService {
   data: Program[] = [];
+  formDataOne = {
+    programBudget: 0,
+    programDescription: '',
+    programName: '',
+    programNumber: '',
+    isVirtual: false,
+    programID: '',
+    isActive: false,
+    canDelete: false
+  }
+  
   allPrograms = new BehaviorSubject<Program[]>([]);
   formdata = new BehaviorSubject<any>({});
 
@@ -28,15 +39,6 @@ export class MyservService {
     return this.http
       .post<ApiDataType<Program>>(
         'http://cmi-ofm.azurewebsites.net/api/program',formObject)
-      // .pipe(
-      //   map((res) => {
-      //     if (res) {
-      //       this.data.push(formData);
-      //       this.allPrograms.next(this.data);
-      //     }
-      //     return res;
-      //   })
-      // );
   }
 
   setData(data:any){
@@ -44,5 +46,16 @@ export class MyservService {
     console.log(this.formdata.getValue());
   }
 
+  editData(data:Program){
+    console.log('in service ');
+    
+    const formObject = new FormData();
+    Object.keys(data).forEach((key) =>
+      formObject.append(key, (data as any)[key])
+    );
+    return this.http
+      .put(
+        'http://cmi-ofm.azurewebsites.net/api/program',formObject)
+  }
   constructor(private http: HttpClient) {}
 }
