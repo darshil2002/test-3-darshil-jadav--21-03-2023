@@ -28,15 +28,15 @@ export class MyservService {
     return this.http
       .post<ApiDataType<Program>>(
         'http://cmi-ofm.azurewebsites.net/api/program',formObject)
-      .pipe(
-        map((res) => {
-          if (res) {
-            this.data.push(formData);
-            this.allPrograms.next(this.data);
-          }
-          return res;
-        })
-      );
+      // .pipe(
+      //   map((res) => {
+      //     if (res) {
+      //       this.data.push(formData);
+      //       this.allPrograms.next(this.data);
+      //     }
+      //     return res;
+      //   })
+      // );
   }
 
   setData(data:any){
