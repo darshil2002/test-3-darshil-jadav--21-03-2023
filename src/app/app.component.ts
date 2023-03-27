@@ -66,12 +66,7 @@ export class AppComponent {
    console.log(programData);
     this.editData=programData;
     this.myservice.formDataOne=programData;
-   // console.log(this.editData);
-    
     this.myservice.formDataOne = programData;
-    // this.showFrom=!this.showFrom;
-//  this.myservice.isClicked.next(true);
-//  this.myservice.addOrEdit.next(false);
   }
 
 
